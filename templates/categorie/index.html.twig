@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <h1 class="text-2xl font-bold mb-6">Les Catégories : </h1>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 uppercase">Id</th>
+                    <th class="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 uppercase">Nom</th>
+                    <th class="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            {% for categorie in categories %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 text-sm text-gray-700">{{ categorie.id }}</td>
+                    <td class="px-4 py-2 text-sm text-gray-700">{{ categorie.nomCategorie }}</td>
+                    <td class="px-4 py-2 text-sm text-blue-500">
+                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="mr-2 hover:underline">Détail</a>
+                        <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="hover:underline">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" class="px-4 py-2 text-center text-gray-500">Aucune Catégories trouvés</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('app_categorie_new') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Ajouter une Catégorie</a>
+    </div>
+{% endblock %}
