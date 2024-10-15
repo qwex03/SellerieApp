@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\EtatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
-class Categorie
+#[ORM\Entity(repositoryClass: EtatRepository::class)]
+class Etat
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,12 +16,12 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom_categorie = null;
+    private ?string $nom = null;
 
     /**
      * @var Collection<int, Produit>
      */
-    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'id_categorie', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'id_etat')]
     private Collection $produits;
 
     public function __construct()
@@ -34,14 +34,14 @@ class Categorie
         return $this->id;
     }
 
-    public function getNomCategorie(): ?string
+    public function getNom(): ?string
     {
-        return $this->nom_categorie;
+        return $this->nom;
     }
 
-    public function setNomCategorie(string $nom_categorie): static
+    public function setNom(string $nom): static
     {
-        $this->nom_categorie = $nom_categorie;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -58,7 +58,7 @@ class Categorie
     {
         if (!$this->produits->contains($produit)) {
             $this->produits->add($produit);
-            $produit->setIdCategorie($this);
+            $produit->setIdEtat($this);
         }
 
         return $this;
@@ -68,8 +68,8 @@ class Categorie
     {
         if ($this->produits->removeElement($produit)) {
             // set the owning side to null (unless already changed)
-            if ($produit->getIdCategorie() === $this) {
-                $produit->setIdCategorie(null);
+            if ($produit->getIdEtat() === $this) {
+                $produit->setIdEtat(null);
             }
         }
 

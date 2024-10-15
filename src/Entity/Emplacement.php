@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\EmplacementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
-class Categorie
+#[ORM\Entity(repositoryClass: EmplacementRepository::class)]
+class Emplacement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,12 +16,15 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom_categorie = null;
+    private ?string $rayon = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $etagere = null;
 
     /**
      * @var Collection<int, Produit>
      */
-    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'id_categorie', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'id_emplacement')]
     private Collection $produits;
 
     public function __construct()
@@ -34,14 +37,26 @@ class Categorie
         return $this->id;
     }
 
-    public function getNomCategorie(): ?string
+    public function getRayon(): ?string
     {
-        return $this->nom_categorie;
+        return $this->rayon;
     }
 
-    public function setNomCategorie(string $nom_categorie): static
+    public function setRayon(string $rayon): static
     {
-        $this->nom_categorie = $nom_categorie;
+        $this->rayon = $rayon;
+
+        return $this;
+    }
+
+    public function getEtagere(): ?string
+    {
+        return $this->etagere;
+    }
+
+    public function setEtagere(string $etagere): static
+    {
+        $this->etagere = $etagere;
 
         return $this;
     }
@@ -58,7 +73,7 @@ class Categorie
     {
         if (!$this->produits->contains($produit)) {
             $this->produits->add($produit);
-            $produit->setIdCategorie($this);
+            $produit->setIdEmplacement($this);
         }
 
         return $this;
@@ -68,8 +83,8 @@ class Categorie
     {
         if ($this->produits->removeElement($produit)) {
             // set the owning side to null (unless already changed)
-            if ($produit->getIdCategorie() === $this) {
-                $produit->setIdCategorie(null);
+            if ($produit->getIdEmplacement() === $this) {
+                $produit->setIdEmplacement(null);
             }
         }
 
