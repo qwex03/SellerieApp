@@ -3,9 +3,9 @@
 {% block title %}Produit{% endblock %}
 
 {% block body %}
-<h1>Historique du produit : {{ produit.nom }}</h1>
+<h1 class="text-3xl font-bold text-gray-800 mb-4">Historique du produits : {{ produit.nom }}</h1>
 
-    <table border="1" cellpadding="10" cellspacing="0">
+    <table class="table" id="myTable">
         <thead>
             <tr>
                 <th>Date de prêt</th>
@@ -21,9 +21,7 @@
                     <td>{{ historique.nom }}</td>
                 </tr>
             {% else %}
-                <tr>
-                    <td colspan="3">Aucun historique disponible</td>
-                </tr>
+                Aucun historique pour ce produit
             {% endfor %}
         </tbody>
     </table>

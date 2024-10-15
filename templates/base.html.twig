@@ -16,6 +16,7 @@
             flex-grow: 1;
         }
 
+
         </style>
         {% block stylesheets %}
         {% endblock %}
@@ -35,7 +36,9 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
         <script>
+        if ($('#myTable').length >= 1) {
             let table = new DataTable('#myTable');
+        }
         </script>
         {% endblock %}
         {% include 'www/footer.html.twig' %}
