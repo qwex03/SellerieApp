@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\HistoriqueRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HistoriqueRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Historique
 {
     #[ORM\Id]
@@ -13,10 +15,10 @@ class Historique
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $date_pret = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $date_retour = null;
 
     #[ORM\Column(length: 255)]
@@ -24,7 +26,22 @@ class Historique
 
     #[ORM\ManyToOne(inversedBy: 'historiques')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?produit $produit = null;
+    private ?Produit $produit = null;
+
+    // Constructor to initialize date_pret
+    public function __construct()
+    {
+        $this->date_pret = new \DateTimeImmutable(); // Set to today's date by default
+    }
+
+    #[ORM\PrePersist]
+    public function setDatePretAutomatically(): void
+    {
+        // Ensures that date_pret is set to today when the entity is persisted
+        if ($this->date_pret === null) {
+            $this->date_pret = new \DateTimeImmutable();
+        }
+    }
 
     public function getId(): ?int
     {
@@ -67,15 +84,16 @@ class Historique
         return $this;
     }
 
-    public function getProduit(): ?produit
+    public function getProduit(): ?Produit
     {
         return $this->produit;
     }
 
-    public function setProduit(?produit $produit): static
+    public function setProduit(?Produit $produit): static
     {
         $this->produit = $produit;
 
         return $this;
     }
 }
+

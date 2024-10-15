@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Form\ProduitType;
+use App\Entity\Historique;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/produit')]
 final class ProduitController extends AbstractController
@@ -77,5 +78,15 @@ final class ProduitController extends AbstractController
         }
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/historique', name: 'app_produit_historique', methods: ['GET'])]
+    public function historique(Produit $produit): Response
+    {
+        $historiques = $produit->getHistoriques();
+
+        return $this->render('produit/historique.html.twig', [
+            'produit' => $produit,
+        ]);
     }
 }

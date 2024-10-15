@@ -6,6 +6,10 @@
                class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_categorie_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                 Catégorie
             </a>
+            <a href="{{ path('app_emplacement_index') }}"
+               class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_emplacement_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                Emplacement
+            </a>
             <a href="{{ path('app_produit_index') }}"
                class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_produit_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                 Produit

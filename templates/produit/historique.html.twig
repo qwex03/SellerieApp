@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+<h1>Historique du produit : {{ produit.nom }}</h1>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Date de prêt</th>
+                <th>Date de retour</th>
+                <th>Nom associé</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for historique in produit.historiques %}
+                <tr>
+                    <td>{{ historique.datePret|date('d/m/Y') }}</td>
+                    <td>{{ historique.dateRetour|date('d/m/Y') }}</td>
+                    <td>{{ historique.nom }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun historique disponible</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_index') }}">back to list</a>
+
+
+{% endblock %}
