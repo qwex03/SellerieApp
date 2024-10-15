@@ -2,15 +2,22 @@
 
 {% block title %}Produit index{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="//cdn.datatables.net/2.1.7/css/dataTables.dataTables.min.css" >
+{% endblock %}
+
 {% block body %}
     <h1>Produit index</h1>
 
-    <table class="table">
+    <table class="table" id="myTable">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>actions</th>
+                <th>Catégorie</th>
+                <th>Etat</th>
+                <th>Localisation</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +25,9 @@
             <tr>
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.nom }}</td>
+                <td>{{ produit.getIdCategorie().getNomCategorie() }}</td>
+                <td>{{ produit.getIdEtat().getNom() }}</td>
+                <td>{{ produit.getIdEmplacement().getRayon()}}, {{ produit.getIdEmplacement().getEtagere() }}</td>    
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
@@ -25,11 +35,19 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <a href="{{ path('app_produit_new') }}">Create new</a>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#myTable');
+    </script>
 {% endblock %}

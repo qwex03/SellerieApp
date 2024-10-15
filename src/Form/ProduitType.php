@@ -35,7 +35,9 @@ class ProduitType extends AbstractType
         ])
         ->add('id_emplacement', EntityType::class, [
             'class' => Emplacement::class,
-            'choice_label' => 'id',
+            'choice_label' => function (Emplacement $emplacement) {
+                return $emplacement->getRayon() . ' - ' . $emplacement->getEtagere();
+            },
             'attr' => [
                 'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
             ],

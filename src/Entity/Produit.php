@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
@@ -28,6 +30,18 @@ class Produit
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $id_etat = null;
 
+    /**
+     * @var Collection<int, Historique>
+     */
+    #[ORM\OneToMany(targetEntity: Historique::class, mappedBy: 'produit')]
+    private Collection $historiques;
+
+    public function __construct()
+    {
+        $this->historiques = new ArrayCollection();
+    }
+
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -80,4 +94,36 @@ class Produit
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Historique>
+     */
+    public function getHistoriques(): Collection
+    {
+        return $this->historiques;
+    }
+
+    public function addHistorique(Historique $historique): static
+    {
+        if (!$this->historiques->contains($historique)) {
+            $this->historiques->add($historique);
+            $historique->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistorique(Historique $historique): static
+    {
+        if ($this->historiques->removeElement($historique)) {
+            // set the owning side to null (unless already changed)
+            if ($historique->getProduit() === $this) {
+                $historique->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 }

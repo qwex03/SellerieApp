@@ -20,8 +20,6 @@
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
     </head>
     <body>
         {% include 'www/header.html.twig' %}
@@ -30,6 +28,8 @@
         {% block body %}{% endblock %}
         </div>
 
+        {% block javascripts %}
+        {% endblock %}
         {% include 'www/footer.html.twig' %}
     </body>
 </html>
