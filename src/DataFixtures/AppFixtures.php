@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Produit;
 use App\Entity\Categorie;
 use App\Entity\Emplacement;
+use App\Entity\Historique; 
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -51,6 +52,7 @@ class AppFixtures extends Fixture {
             $etats[] = $etat; 
         }
 
+        $produits = []; 
         for ($k = 0; $k < 300; $k++) { 
             $produit = new Produit();
             $produit->setNom($faker->word())
@@ -58,7 +60,8 @@ class AppFixtures extends Fixture {
                     ->setIdEmplacement($faker->randomElement($emplacements)) 
                     ->setIdCategorie($faker->randomElement($categories));
 
-            $manager->persist($produit); 
+            $manager->persist($produit);
+            $produits[] = $produit; 
         }
 
         for ($i = 0; $i < 10; $i++) {
@@ -74,6 +77,17 @@ class AppFixtures extends Fixture {
             $user->setPassword($hash);
 
             $manager->persist($user);
+        }
+
+        for ($i = 0; $i < 50; $i++) {
+            $historique = new Historique();
+            $dateRetour = new \DateTimeImmutable($faker->dateTimeBetween('now', '+20 days')->format('Y-m-d'));
+            $historique->setDateRetour($dateRetour)
+                    ->setNom($faker->name())
+                    ->setProduit($faker->randomElement($produits)) 
+                    ->setRetour($faker->boolean()); 
+
+            $manager->persist($historique);
         }
 
         $manager->flush(); 

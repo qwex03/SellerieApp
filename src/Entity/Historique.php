@@ -28,6 +28,9 @@ class Historique
     #[ORM\JoinColumn(nullable: false)]
     private ?Produit $produit = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $retour = null;
+
     // Constructor to initialize date_pret
     public function __construct()
     {
@@ -92,6 +95,18 @@ class Historique
     public function setProduit(?Produit $produit): static
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function isRetour(): ?bool
+    {
+        return $this->retour;
+    }
+
+    public function setRetour(?bool $retour): static
+    {
+        $this->retour = $retour;
 
         return $this;
     }

@@ -12,6 +12,8 @@
                 <th>Date_pret</th>
                 <th>Date_retour</th>
                 <th>Nom</th>
+                <th>Produit</th>
+                <th>Retour</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +24,8 @@
                 <td>{{ historique.datePret|date('d/m/y')}}</td>
                 <td>{{ historique.dateRetour|date('d/m/y') }}</td>
                 <td>{{ historique.nom }}</td>
+                <td>{{ historique.getProduit().getNom() }}</td>
+                <td>{{ historique.retour ? "Oui" : "Non" }}</td>
                 <td>
                     <a href="{{ path('app_historique_show', {'id': historique.id}) }}">show</a>
                     <a href="{{ path('app_historique_edit', {'id': historique.id}) }}">edit</a>
