@@ -2,9 +2,6 @@
 
 {% block title %}Produit index{% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="//cdn.datatables.net/2.1.7/css/dataTables.dataTables.min.css" >
-{% endblock %}
 
 {% block body %}
     <h1>Produit index</h1>
@@ -44,10 +41,3 @@
     <a href="{{ path('app_produit_new') }}">Create new</a>
 {% endblock %}
 
-{% block javascripts %}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
-    <script>
-        let table = new DataTable('#myTable');
-    </script>
-{% endblock %}

@@ -5,21 +5,21 @@
 {% block body %}
     <h1 class="text-2xl font-bold mb-6">Les Catégories : </h1>
 
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
-            <thead class="bg-gray-100">
+    <div>
+        <table class="table" id="myTable">
+            <thead>
                 <tr>
-                    <th class="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 uppercase">Id</th>
-                    <th class="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 uppercase">Nom</th>
-                    <th class="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 uppercase">Actions</th>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody>
             {% for categorie in categories %}
-                <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-2 text-sm text-gray-700">{{ categorie.id }}</td>
-                    <td class="px-4 py-2 text-sm text-gray-700">{{ categorie.nomCategorie }}</td>
-                    <td class="px-4 py-2 text-sm text-blue-500">
+                <tr>
+                    <td>{{ categorie.id }}</td>
+                    <td>{{ categorie.nomCategorie }}</td>
+                    <td>
                         <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="mr-2 hover:underline">Détail</a>
                         <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="hover:underline">Modifier</a>
                     </td>
@@ -34,6 +34,6 @@
     </div>
 
     <div class="mt-4">
-        <a href="{{ path('app_categorie_new') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Ajouter une Catégorie</a>
+        <a href="{{ path('app_categorie_new') }}">Ajouter une Catégorie</a>
     </div>
 {% endblock %}
