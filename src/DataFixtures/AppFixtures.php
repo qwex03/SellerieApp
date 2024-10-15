@@ -3,14 +3,23 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Entity\Produit;
 use App\Entity\Etat;
+use App\Entity\User;
+use App\Entity\Produit;
 use App\Entity\Categorie;
 use App\Entity\Emplacement;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture {
+
+    private UserPasswordHasherInterface $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
 
     public function load(ObjectManager $manager): void
     {
@@ -50,6 +59,21 @@ class AppFixtures extends Fixture {
                     ->setIdCategorie($faker->randomElement($categories));
 
             $manager->persist($produit); 
+        }
+
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+            $user->setEmail($faker->email());
+            if ($i == 0) {
+                $user->setRoles(['ROLE_ADMIN']);
+            } else {
+                $user->setRoles([]);
+            }
+
+            $hash = $this->hasher->hashPassword($user, 'Root');
+            $user->setPassword($hash);
+
+            $manager->persist($user);
         }
 
         $manager->flush(); 

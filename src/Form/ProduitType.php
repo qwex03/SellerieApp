@@ -2,35 +2,56 @@
 
 namespace App\Form;
 
-use App\Entity\Categorie;
-use App\Entity\Emplacement;
 use App\Entity\Etat;
 use App\Entity\Produit;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Categorie;
+use App\Entity\Emplacement;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('nom')
-            ->add('id_categorie', EntityType::class, [
-                'class' => Categorie::class,
-                'choice_label' => 'id',
-            ])
-            ->add('id_emplacement', EntityType::class, [
-                'class' => Emplacement::class,
-                'choice_label' => 'id',
-            ])
-            ->add('id_etat', EntityType::class, [
-                'class' => Etat::class,
-                'choice_label' => 'id',
-            ])
-        ;
+{
+    $builder
+        ->add('nom', null, [
+            'attr' => [
+                'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+                'placeholder' => 'Nom du produit',
+            ],
+        ])
+        ->add('id_categorie', EntityType::class, [
+            'class' => Categorie::class,
+            'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('c')->orderBy('c.nom_categorie', 'ASC');
+            },
+            'choice_label' => 'nom_categorie',
+            'attr' => [
+                'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+            ],
+        ])
+        ->add('id_emplacement', EntityType::class, [
+            'class' => Emplacement::class,
+            'choice_label' => 'id',
+            'attr' => [
+                'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+            ],
+        ])
+        ->add('id_etat', EntityType::class, [
+            'class' => Etat::class,
+            'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('c')->orderBy('c.nom', 'ASC');
+            },
+            'choice_label' => 'nom',
+            'attr' => [
+                'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+            ],
+        ]);
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

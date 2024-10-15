@@ -1,8 +1,26 @@
 <nav class="bg-gray-800 p-4 mb-4">
-    <div class="container mx-auto">
+    <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-white text-2xl font-bold">Sellerie App</h1>
         <div class="flex space-x-4">
-            <a href="{{ path('app_categorie_index')}}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Catégorie</a>    
+            <a href="{{ path('app_categorie_index') }}"
+               class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_categorie_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                Catégorie
+            </a>
+            <a href="{{ path('app_produit_index') }}"
+               class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_produit_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                Produit
+            </a>
+            {% if app.user %}
+                <div class="relative group">
+                    <span class="text-white cursor-pointer">{{ app.user.email }}</span>
+                    <div class="absolute right-0 mt-2 bg-white rounded-md shadow-lg z-10 hidden group-hover:block">
+                        <form action="{{ path('app_logout') }}" method="post" class="p-2">
+                            <button type="submit" class="text-gray-800 hover:bg-gray-200 rounded-md">Se déconnecter</button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 </nav>
+
