@@ -12,8 +12,18 @@ class EmplacementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('rayon')
-            ->add('etagere')
+            ->add('rayon',null, [
+                'attr' => [
+                    'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+                    'placeholder' => 'Nom du produit',
+                ],
+            ])
+            ->add('etagere',null, [
+                'attr' => [
+                    'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+                    'placeholder' => 'Nom du produit',
+                ],
+            ])
         ;
     }
 

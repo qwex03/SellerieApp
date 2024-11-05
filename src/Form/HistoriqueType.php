@@ -17,12 +17,20 @@ class HistoriqueType extends AbstractType
             ->add('date_retour', null, [
                 'widget' => 'single_text',
             ])
-            ->add('nom')
+            ->add('nom', null, [
+                'attr' => [
+                    'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+                    'placeholder' => 'Nom du produit',
+                ],
+            ])
             ->add('produit', EntityType::class, [
                 'class' => Produit::class,
                 'choice_label' => 'nom',
-            ])
-        ;
+                'attr' => [
+                    'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+                    'placeholder' => 'Nom du produit',
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -3,7 +3,7 @@
 {% block title %}Produit{% endblock %}
 
 {% block body %}
-    <h1>Produit</h1>
+    <h1>{{produit.nom}}</h1>
 
     <table class="table">
         <tbody>
@@ -15,6 +15,33 @@
                 <th>Nom</th>
                 <td>{{ produit.nom }}</td>
             </tr>
+        </tbody>
+    </table>
+
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Historique du produits : {{ produit.nom }}</h1>
+
+    <table class="table" id="myTable">
+        <thead>
+            <tr>
+                <th>Date de prêt</th>
+                <th>Date de retour</th>
+                <th>Retour effectué</th>
+                <th>Nom associé</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for historique in produit.historiques %}
+                <tr>
+                    <td>{{ historique.datePret|date('d/m/Y') }}</td>
+                    <td>{{ historique.dateRetour|date('d/m/Y') }}</td>
+                    <td>{{ historique.retour ? "Oui":"Non"}}</td>
+                    <td>{{ historique.nom }}</td>
+                    <td><a href="{{ path('app_historique_retour', {'id': historique.id}) }}">Modifier Retour</a></td>
+                </tr>
+            {% else %}
+                Aucun historique pour ce produit
+            {% endfor %}
         </tbody>
     </table>
 

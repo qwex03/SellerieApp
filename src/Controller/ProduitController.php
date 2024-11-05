@@ -80,13 +80,5 @@ final class ProduitController extends AbstractController
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/historique', name: 'app_produit_historique', methods: ['GET'])]
-    public function historique(Produit $produit): Response
-    {
-        $historiques = $produit->getHistoriques();
-
-        return $this->render('produit/historique.html.twig', [
-            'produit' => $produit,
-        ]);
-    }
+    
 }

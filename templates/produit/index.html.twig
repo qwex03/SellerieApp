@@ -27,7 +27,6 @@
                 <td>{{ produit.getIdEmplacement().getRayon()}}, {{ produit.getIdEmplacement().getEtagere() }}</td>    
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
-                    <a href="{{ path('app_produit_historique', {'id': produit.id}) }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 transition duration-300">Historique</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-yellow-600 transition duration-300">Modifier</a>
                 </td>
             </tr>

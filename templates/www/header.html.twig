@@ -19,7 +19,7 @@
                 Produit
             </a>
             {% if app.user %}
-                {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                {% if 'ROLE_ADMIN' in app.user.roles %}
                     <a href="{{ path('app_user_index') }}"
                     class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_user_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                     Gestion des Utilisateurs

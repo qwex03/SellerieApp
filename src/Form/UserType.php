@@ -21,8 +21,17 @@ class UserType extends AbstractType
                 ],
                 'expanded' => true, 
                 'multiple' => true, 
+                'attr' => [
+                    'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+                    'placeholder' => 'Nom du produit',
+                ],
             ])
-            ->add('password');
+            ->add('password',  null, [
+                'attr' => [
+                    'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
+                    'placeholder' => 'Nom du produit',
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
