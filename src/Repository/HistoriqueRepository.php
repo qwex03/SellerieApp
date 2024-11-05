@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Historique;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @extends ServiceEntityRepository<Historique>
@@ -40,4 +41,14 @@ class HistoriqueRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+        public function countRetard(): int
+        {
+            return $this->createQueryBuilder('h')
+                ->select('COUNT(h.id)') 
+                ->where('h.date_retour < :currentDate') 
+                ->setParameter('currentDate', new \DateTime()) 
+                ->getQuery()
+                ->getSingleScalarResult(); 
+        }
 }

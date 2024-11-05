@@ -28,6 +28,9 @@ class GestionController extends AbstractController
 
         $nbcat = $categorieRepository->count();
 
+        $retard = $historiqueRepository->countRetard();
+
+
         return $this->render('gestion/index.html.twig', [
             'nbproduit' => $nbProduit,
             'nbproduithorsdusage' => $nbProduitsCasses,
@@ -35,7 +38,7 @@ class GestionController extends AbstractController
             'nbPret' => $enPret,
             'nbRetour' => $retourné,
             'nbCat' => $nbcat,
-            'nbRetour' => '',
+            'Retard' => $retard
         ]);
     }
 
