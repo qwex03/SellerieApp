@@ -1,7 +1,18 @@
 <nav class="bg-gray-800 p-4 mb-4">
     <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-white text-2xl font-bold">Sellerie App</h1>
-        <div class="flex space-x-4">
+        
+        <!-- Button hamburger -->
+        <div class="md:hidden flex items-center">
+            <button id="hamburger-btn" class="text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Menu principal (visible sur écrans larges) -->
+        <div class="hidden md:flex space-x-4">
             <a href="{{ path('app_categorie_index') }}"
                class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_categorie_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                 Catégorie
@@ -21,16 +32,17 @@
             {% if app.user %}
                 {% if 'ROLE_ADMIN' in app.user.roles %}
                     <a href="{{ path('app_user_index') }}"
-                    class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_user_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
-                    Gestion des Utilisateurs
+                       class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_user_index' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                        Gestion des Utilisateurs
                     </a>
                     <a href="{{ path('app_gestion') }}"
-                    class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_gestion' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
-                    Gestion
+                       class="rounded-md px-3 py-2 text-sm font-medium {{ app.request.get('_route') == 'app_gestion' ? 'text-white bg-gray-700' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                        Gestion
                     </a>
                 {% endif %}
+                <!-- Bouton de déconnexion -->
                 <div class="relative group">
-                    <div class="rounded-md px-4 py-2 text-sm font-bold bg-blue-600 text-white hover:bg-blue-700 transition duration-200">{{ app.user.email }}</span>
+                    <div class="rounded-md px-4 py-2 text-sm font-bold bg-blue-600 text-white hover:bg-blue-700 transition duration-200">{{ app.user.email }}</div>
                     <div class="absolute right-0 mt-2 bg-white rounded-md shadow-lg z-10 hidden group-hover:block">
                         <form action="{{ path('app_logout') }}" method="post" class="p-2">
                             <button type="submit" class="text-gray-800 hover:bg-gray-200 rounded-md">Se déconnecter</button>
@@ -39,11 +51,45 @@
                 </div>
             {% else %}
                 <a href="{{ path('app_login') }}"
-                   class="rounded-md px-4 py-2 text-sm font-bold bg-blue-600 text-white hover:bg-blue-700 transition duration-200">
-                    Se Connecter
-                </a>
+                   class="rounded-md px-4 py-2 text-sm font-bold bg-blue-600 text-white hover:bg-blue-700 transition duration-200">Se Connecter</a>
+            {% endif %}
+        </div>
+
+        <!-- Menu mobile (hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden absolute left-0 w-full bg-gray-800 top-16 z-10">
+            <a href="{{ path('app_categorie_index') }}"
+               class="block px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">Catégorie</a>
+            <a href="{{ path('app_emplacement_index') }}"
+               class="block px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">Emplacement</a>
+            <a href="{{ path('app_historique_index') }}"
+               class="block px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">Prêts</a>
+            <a href="{{ path('app_produit_index') }}"
+               class="block px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">Produit</a>
+            {% if app.user %}
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <a href="{{ path('app_user_index') }}"
+                       class="block px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">Gestion des Utilisateurs</a>
+                    <a href="{{ path('app_gestion') }}"
+                       class="block px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">Gestion</a>
+                {% endif %}
+                <!-- Formulaire de déconnexion dans le menu mobile -->
+                <div class="block px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">
+                    <form action="{{ path('app_logout') }}" method="post">
+                        <button type="submit" class="w-full text-gray-800 hover:bg-gray-200 rounded-md py-2">Se déconnecter</button>
+                    </form>
+                </div>
+            {% else %}
+                <a href="{{ path('app_login') }}"
+                   class="block px-4 py-2 text-sm font-bold bg-blue-600 text-white hover:bg-blue-700 transition duration-200">Se Connecter</a>
             {% endif %}
         </div>
     </div>
 </nav>
 
+<!-- JavaScript pour activer le menu hamburger -->
+<script>
+    document.getElementById('hamburger-btn').addEventListener('click', function() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>

@@ -1,21 +1,107 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GestionController!{% endblock %}
+{% block title %}Gestion de l'inventaire{% endblock %}
 
 {% block body %}
+<div class="container mx-auto my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
 
-<div class="example-wrapper">
-    <h1>Gestion de l'inventaire</h1>
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+        <div class="w-24 h-24 bg-purple-500 text-white rounded-full flex items-center justify-center text-2xl font-semibold">
+            {{ nbproduit }}
+        </div>
+        <h2 class="mt-4 text-lg font-bold text-gray-800">Nombre de produits</h2>
+    </div>
+    
+    <!-- Card: Produits hors d'usage -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+        <div class="relative w-24 h-24">
+            <svg class="w-full h-full" viewBox="0 0 36 36">
+                <!-- Cercle de fond gris -->
+                <circle class="text-gray-200" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none" />
+                <!-- Cercle de progression rouge -->
+                <circle class="text-red-500" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none"
+                        stroke-dasharray="{{ nbproduit > 0 ? ((nbproduithorsdusage / nbproduit) * 100) | round(0) : 0 }}, 100" />
+            </svg>
+            <!-- Texte central indiquant la quantité et le pourcentage -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-lg font-semibold text-red-500">
+                <span class="text-2xl">{{ nbproduithorsdusage }}</span>
+                <span class="text-sm">{{ nbproduit > 0 ? ((nbproduithorsdusage / nbproduit) * 100) | round(0) }}%</span>
+            </div>
+        </div>
+        <h2 class="mt-4 text-lg font-bold text-gray-800">Produits hors d'usage</h2>
+    </div>
 
-    <ul>
-        <li>Nombres de produits : {{ nbproduit }}</li>
-        <li>Nombres de produits hors d'usage : {{ nbproduithorsdusage }} / {{nbproduit}}</li>
-        <li>Nombres de produits à réparer : {{ nbproduitARepar }}</li>
-        <li>Nombres de produits en prêt : {{ nbPret }} / {{nbproduit}}</li>
-        <li>Nombres de produits retourné : {{ nbRetour }} / {{nbproduit}}</li>
-        <li>Nombres de catégorie : {{ nbCat }}</li>
-        <li>Nombres en retard : {{ Retard }}</li>
-    </ul>
+    <!-- Card: Produits à réparer -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+        <div class="relative w-24 h-24">
+            <svg class="w-full h-full" viewBox="0 0 36 36">
+                <circle class="text-gray-200" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none" />
+                <circle class="text-yellow-500" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none"
+                        stroke-dasharray="{{ nbproduit > 0 ? ((nbproduitARepar / nbproduit) * 100) | round(0) : 0 }}, 100" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-lg font-semibold text-yellow-500">
+                <span class="text-2xl">{{ nbproduitARepar }}</span>
+                <span class="text-sm">{{ nbproduit > 0 ? ((nbproduitARepar / nbproduit) * 100) | round(0) }}%</span>
+            </div>
+        </div>
+        <h2 class="mt-4 text-lg font-bold text-gray-800">Produits à réparer</h2>
+    </div>
+
+    <!-- Card: Produits en prêt -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+        <div class="relative w-24 h-24">
+            <svg class="w-full h-full" viewBox="0 0 36 36">
+                <circle class="text-gray-200" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none" />
+                <circle class="text-green-500" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none"
+                        stroke-dasharray="{{ nbproduit > 0 ? ((nbPret / nbproduit) * 100) | round(0) : 0 }}, 100" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-lg font-semibold text-green-500">
+                <span class="text-2xl">{{ nbPret }}</span>
+                <span class="text-sm">{{ nbproduit > 0 ? ((nbPret / nbproduit) * 100) | round(0) }}%</span>
+            </div>
+        </div>
+        <h2 class="mt-4 text-lg font-bold text-gray-800">Produits en prêt</h2>
+    </div>
+
+    <!-- Card: Produits retournés -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+        <div class="relative w-24 h-24">
+            <svg class="w-full h-full" viewBox="0 0 36 36">
+                <circle class="text-gray-200" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none" />
+                <circle class="text-indigo-500" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none"
+                        stroke-dasharray="{{ nbproduit > 0 ? ((nbRetour / nbproduit) * 100) | round(0) : 0 }}, 100" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-lg font-semibold text-indigo-500">
+                <span class="text-2xl">{{ nbRetour }}</span>
+                <span class="text-sm">{{ nbproduit > 0 ? ((nbRetour / nbproduit) * 100) | round(0) }}%</span>
+            </div>
+        </div>
+        <h2 class="mt-4 text-lg font-bold text-gray-800">Produits retournés</h2>
+    </div>
+
+    <!-- Card: Nombre de catégories -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+        <div class="w-24 h-24 bg-purple-500 text-white rounded-full flex items-center justify-center text-2xl font-semibold">
+            {{ nbCat }}
+        </div>
+        <h2 class="mt-4 text-lg font-bold text-gray-800">Nombre de catégories</h2>
+    </div>
+
+    <!-- Card: Produits en retard -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+        <div class="relative w-24 h-24">
+            <svg class="w-full h-full" viewBox="0 0 36 36">
+                <circle class="text-gray-200" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none" />
+                <circle class="text-red-600" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none"
+                        stroke-dasharray="{{ nbproduit > 0 ? ((Retard / nbproduit) * 100) | round(0) : 0 }}, 100" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-lg font-semibold text-red-600">
+                <span class="text-2xl">{{ Retard }}</span>
+                <span class="text-sm">{{ nbproduit > 0 ? ((Retard / nbproduit) * 100) | round(0) }}%</span>
+            </div>
+        </div>
+        <h2 class="mt-4 text-lg font-bold text-gray-800">Produits en retard</h2>
+    </div>
 
 </div>
 {% endblock %}

@@ -27,8 +27,9 @@
                 <td>{{ historique.getProduit().getNom() }}</td>
                 <td>{{ historique.retour ? "Oui" : "Non" }}</td>
                 <td>
-                    <a href="{{ path('app_historique_show', {'id': historique.id}) }}">show</a>
-                    <a href="{{ path('app_historique_edit', {'id': historique.id}) }}">edit</a>
+                    <a href="{{ path('app_historique_retour', {'id': historique.id})}}">Retour</a>
+                    <a href="{{ path('app_historique_show', {'id': historique.id}) }}">Détail</a>
+                    <a href="{{ path('app_historique_edit', {'id': historique.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}

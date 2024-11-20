@@ -23,13 +23,13 @@ class UserType extends AbstractType
                 'multiple' => true, 
                 'attr' => [
                     'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
-                    'placeholder' => 'Nom du produit',
+                    'placeholder' => 'Roles utilisateur',
                 ],
             ])
             ->add('password',  null, [
                 'attr' => [
                     'class' => 'block w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200',
-                    'placeholder' => 'Nom du produit',
+                    'placeholder' => 'Mot de Passe',
                 ],
             ]);
     }
