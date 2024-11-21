@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reparations;
-use App\Form\ReparationsType;
+use App\Form\Reparations1Type;
 use App\Repository\ReparationsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +26,7 @@ final class ReparationsController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $reparation = new Reparations();
-        $form = $this->createForm(ReparationsType::class, $reparation);
+        $form = $this->createForm(Reparations1Type::class, $reparation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ final class ReparationsController extends AbstractController
     #[Route('/{id}/edit', name: 'app_reparations_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reparations $reparation, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ReparationsType::class, $reparation);
+        $form = $this->createForm(Reparations1Type::class, $reparation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

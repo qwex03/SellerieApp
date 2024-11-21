@@ -5,7 +5,6 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
-
         body {
             display: flex;
             flex-direction: column;
@@ -15,17 +14,11 @@
         .container {
             flex-grow: 1;
         }
-
-
-
-
         </style>
         {% block stylesheets %}
         {% endblock %}
 
         <link rel="stylesheet" href="//cdn.datatables.net/2.1.7/css/dataTables.dataTables.min.css" >
-        
-
     </head>
     <body>
         {% include 'www/header.html.twig' %}
@@ -41,6 +34,7 @@
         if ($('#myTable').length >= 1) {
             let table = new DataTable('#myTable');
         }
+
         </script>
         {% endblock %}
         {% include 'www/footer.html.twig' %}

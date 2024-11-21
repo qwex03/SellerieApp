@@ -25,6 +25,15 @@ class Reparations
     #[ORM\JoinColumn(nullable: false)]
     private ?Statuts $status = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reparations')]
+    private ?User $reparateur = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_start = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_end = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,6 +71,42 @@ class Reparations
     public function setStatus(?Statuts $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getReparateur(): ?User
+    {
+        return $this->reparateur;
+    }
+
+    public function setReparateur(?User $reparateur): static
+    {
+        $this->reparateur = $reparateur;
+
+        return $this;
+    }
+
+    public function getDateStart(): ?\DateTimeInterface
+    {
+        return $this->date_start;
+    }
+
+    public function setDateStart(?\DateTimeInterface $date_start): static
+    {
+        $this->date_start = $date_start;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?\DateTimeInterface
+    {
+        return $this->date_end;
+    }
+
+    public function setDateEnd(?\DateTimeInterface $date_end): static
+    {
+        $this->date_end = $date_end;
 
         return $this;
     }

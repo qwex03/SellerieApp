@@ -15,6 +15,14 @@
                 <th>Date_signalement</th>
                 <td>{{ reparation.dateSignalement ? reparation.dateSignalement|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>Date_start</th>
+                <td>{{ reparation.dateStart ? reparation.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_end</th>
+                <td>{{ reparation.dateEnd ? reparation.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
         </tbody>
     </table>
 
