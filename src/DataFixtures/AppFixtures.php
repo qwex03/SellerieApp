@@ -8,7 +8,8 @@ use App\Entity\User;
 use App\Entity\Produit;
 use App\Entity\Categorie;
 use App\Entity\Emplacement;
-use App\Entity\Historique; 
+use App\Entity\Historique;
+use App\Entity\Statuts;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -50,6 +51,13 @@ class AppFixtures extends Fixture {
             $etat->setNom($etatNom);
             $manager->persist($etat);
             $etats[] = $etat; 
+        }
+
+        $etat = ['en attente', 'en cours', 'fini'];
+        foreach ($etat as $e) {
+            $newEtat = new Statuts();
+            $newEtat->setEtat($e);
+            $manager->persist($newEtat);
         }
 
         $produits = []; 

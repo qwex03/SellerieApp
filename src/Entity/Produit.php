@@ -36,9 +36,16 @@ class Produit
     #[ORM\OneToMany(targetEntity: Historique::class, mappedBy: 'produit')]
     private Collection $historiques;
 
+    /**
+     * @var Collection<int, Reparations>
+     */
+    #[ORM\OneToMany(targetEntity: Reparations::class, mappedBy: 'produit')]
+    private Collection $reparations;
+
     public function __construct()
     {
         $this->historiques = new ArrayCollection();
+        $this->reparations = new ArrayCollection();
     }
 
    
@@ -119,6 +126,36 @@ class Produit
             // set the owning side to null (unless already changed)
             if ($historique->getProduit() === $this) {
                 $historique->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reparations>
+     */
+    public function getReparations(): Collection
+    {
+        return $this->reparations;
+    }
+
+    public function addReparation(Reparations $reparation): static
+    {
+        if (!$this->reparations->contains($reparation)) {
+            $this->reparations->add($reparation);
+            $reparation->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReparation(Reparations $reparation): static
+    {
+        if ($this->reparations->removeElement($reparation)) {
+            // set the owning side to null (unless already changed)
+            if ($reparation->getProduit() === $this) {
+                $reparation->setProduit(null);
             }
         }
 

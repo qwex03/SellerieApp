@@ -3,9 +3,12 @@
 {% block title %}Historique index{% endblock %}
 
 {% block body %}
-    <h1>Historique index</h1>
 
-    <table class="table" id="myTable">
+<h1>Historique des produits en retard</h1>
+
+<p>Il y a {{ NbRetard }} produits en retard<p>
+
+<table class="table" id="myTable">
         <thead>
             <tr>
                 <th>Id</th>
@@ -18,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for historique in historiques %}
+        {% for historique in Retard %}
             <tr>
                 <td>{{ historique.id }}</td>
                 <td>{{ historique.datePret|date('d/m/y')}}</td>
@@ -27,9 +30,7 @@
                 <td>{{ historique.getProduit().getNom() }}</td>
                 <td>{{ historique.retour ? "Oui" : "Non" }}</td>
                 <td>
-                    {% if not historique.retour %}
                     <a href="{{ path('app_historique_retour', {'id': historique.id})}}">Retour</a>
-                    {% endif %}
                     <a href="{{ path('app_historique_show', {'id': historique.id}) }}">Détail</a>
                     <a href="{{ path('app_historique_edit', {'id': historique.id}) }}">Modifier</a>
                 </td>
@@ -42,5 +43,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_historique_new') }}">Create new</a>
 {% endblock %}

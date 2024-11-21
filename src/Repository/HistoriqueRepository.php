@@ -52,4 +52,14 @@ class HistoriqueRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getSingleScalarResult(); 
         }
+
+        public function Retard(): array
+        {
+            return $this->createQueryBuilder('h')
+                ->where('h.date_retour < :currentDate')
+                ->andWhere('h.retour = 0')
+                ->setParameter('currentDate', new \DateTime())
+                ->getQuery()
+                ->getResult();
+        }
 }

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reparations{% endblock %}
+
+{% block body %}
+    <h1>Reparations</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reparation.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_signalement</th>
+                <td>{{ reparation.dateSignalement ? reparation.dateSignalement|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reparations_index') }}">back to list</a>
+
+    <a href="{{ path('app_reparations_edit', {'id': reparation.id}) }}">edit</a>
+
+    {{ include('reparations/_delete_form.html.twig') }}
+{% endblock %}

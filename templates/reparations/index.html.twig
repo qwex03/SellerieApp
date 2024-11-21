@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reparations index{% endblock %}
+
+{% block body %}
+    <h1>Liste des Réparations</h1>
+
+    <table class="table" id="myTable">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Date_signalement</th>
+                <th>Statut Réparation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reparation in reparations %}
+            <tr>
+                <td>{{ reparation.getProduit().getNom() }}</td>
+                <td>{{ reparation.dateSignalement ? reparation.dateSignalement|date('d-m-Y') : '' }}</td>
+                <td>{{ reparation.getStatus().getEtat() }}</td>
+                <td>
+                    <a href="{{ path('app_reparations_show', {'id': reparation.id}) }}">show</a>
+                    <a href="{{ path('app_reparations_edit', {'id': reparation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reparations_new') }}">Créer</a>
+{% endblock %}

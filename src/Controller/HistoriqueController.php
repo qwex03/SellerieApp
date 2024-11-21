@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Statuts;
 use App\Form\RetourType;
 use App\Entity\Historique;
+use App\Entity\Reparations;
 use App\Form\HistoriqueType;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Entity;
 use App\Repository\HistoriqueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +24,17 @@ final class HistoriqueController extends AbstractController
     {
         return $this->render('historique/index.html.twig', [
             'historiques' => $historiqueRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/retard', name: 'app_historique_retard', methods: ['GET'])]
+    public function retard(HistoriqueRepository $historiqueRepository): Response
+    {   
+        $Nbretard = $historiqueRepository->countRetard();
+        $Retard = $historiqueRepository->Retard();
+        return $this->render('historique/retard.html.twig', [
+            "NbRetard" => $Nbretard,
+            "Retard" => $Retard
         ]);
     }
 
@@ -78,22 +92,26 @@ final class HistoriqueController extends AbstractController
             throw $this->createNotFoundException('Historique non trouvé');
         }
 
-        if($historique->isRetour()) {
-            $this->addFlash('warning', 'Ce produit a déjà été retourné, modification impossible.');
-            return $this->redirectToRoute('app_historique_index');
-        }
-
         $form = $this->createForm(RetourType::class, $historique);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $etat = $form->get('etat')->getData();
             $produit = $historique->getProduit();
             $produit->setIdEtat($etat);
+            if ($etat->getNom() == 'à réparer') {
+                $reparation = new Reparations();
+                $reparation->setProduit($produit);
+                $reparation->setDateSignalement(new \DateTime());
+                $status = $entityManager->getRepository(Statuts::class)->find(1); 
+                if ($status) {
+                    $reparation->setStatus($status); 
+                    $entityManager->persist($reparation);
+                }
+            }
 
             $entityManager->persist($historique);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_historique_index', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('historique/retour.html.twig', [
             'form' => $form->createView(),
@@ -112,4 +130,5 @@ final class HistoriqueController extends AbstractController
 
         return $this->redirectToRoute('app_historique_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
