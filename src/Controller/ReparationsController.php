@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Reparations;
 use App\Form\Reparations1Type;
-use App\Repository\ReparationsRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ReparationsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/reparations')]
 final class ReparationsController extends AbstractController
@@ -57,6 +58,16 @@ final class ReparationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($reparation->getStatus() && $reparation->getStatus()->getEtat() === 'fini') {
+                $produit = $reparation->getProduit();
+                if ($produit) {
+                    $etatRepare = $entityManager->getRepository(Etat::class)->findOneBy(['nom' => 'bon état']);
+
+                    $produit->setIdEtat($etatRepare);
+                    $entityManager->persist($produit);
+                }
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_reparations_index', [], Response::HTTP_SEE_OTHER);

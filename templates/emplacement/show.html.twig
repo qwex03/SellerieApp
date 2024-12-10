@@ -3,28 +3,44 @@
 {% block title %}Emplacement{% endblock %}
 
 {% block body %}
-    <h1>Emplacement</h1>
+    <div class="max-w-4xl mx-auto mt-10">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Emplacement</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ emplacement.id }}</td>
-            </tr>
-            <tr>
-                <th>Rayon</th>
-                <td>{{ emplacement.rayon }}</td>
-            </tr>
-            <tr>
-                <th>Etagere</th>
-                <td>{{ emplacement.etagere }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="overflow-hidden bg-white shadow-md rounded-lg">
+            <table class="min-w-full table-auto">
+                <tbody class="divide-y divide-gray-200">
+                    <tr>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
+                            Id
+                        </th>
+                        <td class="px-6 py-4 text-sm text-gray-700">{{ emplacement.id }}</td>
+                    </tr>
+                    <tr>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
+                            Rayon
+                        </th>
+                        <td class="px-6 py-4 text-sm text-gray-700">{{ emplacement.rayon }}</td>
+                    </tr>
+                    <tr>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
+                            Étagère
+                        </th>
+                        <td class="px-6 py-4 text-sm text-gray-700">{{ emplacement.etagere }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <a href="{{ path('app_emplacement_index') }}">back to list</a>
-
-    <a href="{{ path('app_emplacement_edit', {'id': emplacement.id}) }}">edit</a>
-
-    {{ include('emplacement/_delete_form.html.twig') }}
+        <div class="mt-6 flex space-x-4">
+            <a href="{{ path('app_emplacement_index') }}" 
+               class="inline-block px-4 py-2 bg-blue-500 text-white font-medium text-sm rounded-md shadow-sm hover:bg-blue-600">
+                Retour
+            </a>
+            <a href="{{ path('app_emplacement_edit', {'id': emplacement.id}) }}" 
+               class="inline-block px-4 py-2 bg-green-500 text-white font-medium text-sm rounded-md shadow-sm hover:bg-green-600">
+                Modifier
+            </a>
+            {{ include('emplacement/_delete_form.html.twig', { 'class': 'inline-block px-4 py-2 bg-red-500 text-white font-medium text-sm rounded-md shadow-sm hover:bg-red-600' }) }}
+        </div>
+    </div>
 {% endblock %}

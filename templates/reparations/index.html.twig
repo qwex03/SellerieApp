@@ -3,39 +3,43 @@
 {% block title %}Reparations index{% endblock %}
 
 {% block body %}
-    <h1>Reparations index</h1>
+    <h1 class="text-dark mb-2 text-2xl font-semibold dark:text-white">Reparations index</h1>
 
     <table class="table" id="myTable">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Produit</th>
                 <th>Date_signalement</th>
+                <th>Statuts</th>
                 <th>Date_start</th>
                 <th>Date_end</th>
+                <th>Réparateurs</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for reparation in reparations %}
             <tr>
-                <td>{{ reparation.id }}</td>
+                <td>{{ reparation.getProduit().getNom() }}</td>
                 <td>{{ reparation.dateSignalement ? reparation.dateSignalement|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reparation.getStatus().getEtat() }}</td>
                 <td>{{ reparation.dateStart ? reparation.dateStart|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ reparation.dateEnd ? reparation.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reparation.getReparateur() and reparation.getReparateur().getEmail() ? reparation.getReparateur().getEmail() : 'Non assigné' }}</td>
                 <td>
-                    <a href="{{ path('app_reparations_show', {'id': reparation.id}) }}">show</a>
-                    <a href="{{ path('app_reparations_edit', {'id': reparation.id}) }}">edit</a>
+                    <a href="{{ path('app_reparations_show', {'id': reparation.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
+                    <a href="{{ path('app_reparations_edit', {'id': reparation.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td>no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_reparations_new') }}">Create new</a>
+    <a href="{{ path('app_reparations_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter une Réparations</a>
 
     <h2>Planning des Réparations</h2>
 
@@ -55,6 +59,7 @@
     ];
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: 'fr',
     initialView: 'dayGridWeek',
     events: events
     });

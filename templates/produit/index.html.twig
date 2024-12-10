@@ -4,7 +4,7 @@
 
 
 {% block body %}
-    <h1>Produit index</h1>
+    <h1 class="text-dark mb-2 text-2xl font-semibold dark:text-white">Produit index</h1>
 
     <table class="table" id="myTable">
         <thead>
@@ -38,6 +38,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+    <a href="{{ path('app_produit_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter un produit</a>
 {% endblock %}
 

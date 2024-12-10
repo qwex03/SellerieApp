@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Emplacement index{% endblock %}
+{% block title %}Emplacement{% endblock %}
 
 {% block body %}
-    <h1>Emplacement index</h1>
+    <h1 class="text-dark mb-2 text-2xl font-semibold dark:text-white">Emplacement</h1>
 
     <table class="table" id="myTable">
         <thead>
@@ -21,8 +21,8 @@
                 <td>{{ emplacement.rayon }}</td>
                 <td>{{ emplacement.etagere }}</td>
                 <td>
-                    <a href="{{ path('app_emplacement_show', {'id': emplacement.id}) }}">show</a>
-                    <a href="{{ path('app_emplacement_edit', {'id': emplacement.id}) }}">edit</a>
+                    <a href="{{ path('app_emplacement_show', {'id': emplacement.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
+                    <a href="{{ path('app_emplacement_edit', {'id': emplacement.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_emplacement_new') }}">Create new</a>
+    <a href="{{ path('app_emplacement_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter un emplacement</a>
 {% endblock %}

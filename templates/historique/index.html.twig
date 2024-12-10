@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Historique index{% endblock %}
+{% block title %}Historique{% endblock %}
 
 {% block body %}
-    <h1>Historique index</h1>
+    <h1 class="text-dark mb-2 text-2xl font-semibold dark:text-white">Historique</h1>
 
     <table class="table" id="myTable">
         <thead>
@@ -28,10 +28,10 @@
                 <td>{{ historique.retour ? "Oui" : "Non" }}</td>
                 <td>
                     {% if not historique.retour %}
-                    <a href="{{ path('app_historique_retour', {'id': historique.id})}}">Retour</a>
+                    <a href="{{ path('app_historique_retour', {'id': historique.id})}}" class="inline-block bg-orange-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Retour</a>
                     {% endif %}
-                    <a href="{{ path('app_historique_show', {'id': historique.id}) }}">Détail</a>
-                    <a href="{{ path('app_historique_edit', {'id': historique.id}) }}">Modifier</a>
+                    <a href="{{ path('app_historique_show', {'id': historique.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
+                    <a href="{{ path('app_historique_edit', {'id': historique.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -42,7 +42,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_historique_new') }}">Create new</a>
+    <a href="{{ path('app_historique_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter un prêt</a>
 
 
 {% endblock %}

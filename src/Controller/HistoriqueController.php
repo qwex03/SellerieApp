@@ -111,6 +111,7 @@ final class HistoriqueController extends AbstractController
 
             $entityManager->persist($historique);
             $entityManager->flush();
+            return $this->redirectToRoute('app_historique_index', [], Response::HTTP_SEE_OTHER);
 
         }
         return $this->render('historique/retour.html.twig', [

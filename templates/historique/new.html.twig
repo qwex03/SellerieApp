@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Historique{% endblock %}
+{% block title %}Historique{% endblock %}
 
 {% block body %}
-    <h1>Create new Historique</h1>
+    <h1 class="text-center">Créer un Historique</h1>
 
     {{ include('historique/_form.html.twig') }}
 
-    <a href="{{ path('app_historique_index') }}">back to list</a>
+    <a class="text-center" href="{{ path('app_historique_index') }}">Retour</a>
 {% endblock %}

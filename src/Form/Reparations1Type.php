@@ -27,15 +27,15 @@ class Reparations1Type extends AbstractType
             ])
             ->add('produit', EntityType::class, [
                 'class' => Produit::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('status', EntityType::class, [
                 'class' => Statuts::class,
-                'choice_label' => 'id',
+                'choice_label' => 'etat',
             ])
             ->add('reparateur', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'id',
+                'choice_label' => 'email',
             ])
         ;
     }

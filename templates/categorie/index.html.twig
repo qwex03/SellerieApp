@@ -3,7 +3,7 @@
 {% block title %}Categorie{% endblock %}
 
 {% block body %}
-    <h1 class="text-2xl font-bold mb-6">Les Catégories : </h1>
+    <h1 class="text-dark mb-2 text-2xl font-semibold dark:text-white">Les Catégories : </h1>
 
     <div>
         <table class="table" id="myTable">
@@ -20,8 +20,8 @@
                     <td>{{ categorie.id }}</td>
                     <td>{{ categorie.nomCategorie }}</td>
                     <td>
-                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="mr-2 hover:underline">Détail</a>
-                        <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="hover:underline">Modifier</a>
+                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
+                        <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Modifier</a>
                     </td>
                 </tr>
             {% else %}
@@ -34,6 +34,6 @@
     </div>
 
     <div class="mt-4">
-        <a href="{{ path('app_categorie_new') }}">Ajouter une Catégorie</a>
+        <a href="{{ path('app_categorie_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter une Catégorie</a>
     </div>
 {% endblock %}

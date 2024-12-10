@@ -3,6 +3,8 @@
 {% block title %}Gestion de l'inventaire{% endblock %}
 
 {% block body %}
+
+<h1 class="text-dark mb-2 text-2xl font-semibold dark:text-white">Statistiques de l'inventaire : </h1>
 <div class="container mx-auto my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
 
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
@@ -12,17 +14,13 @@
         <h2 class="mt-4 text-lg font-bold text-gray-800">Nombre de produits</h2>
     </div>
     
-    <!-- Card: Produits hors d'usage -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
         <div class="relative w-24 h-24">
             <svg class="w-full h-full" viewBox="0 0 36 36">
-                <!-- Cercle de fond gris -->
                 <circle class="text-gray-200" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none" />
-                <!-- Cercle de progression rouge -->
                 <circle class="text-red-500" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none"
                         stroke-dasharray="{{ nbproduit > 0 ? ((nbproduithorsdusage / nbproduit) * 100) | round(0) : 0 }}, 100" />
             </svg>
-            <!-- Texte central indiquant la quantité et le pourcentage -->
             <div class="absolute inset-0 flex flex-col items-center justify-center text-lg font-semibold text-red-500">
                 <span class="text-2xl">{{ nbproduithorsdusage }}</span>
                 <span class="text-sm">{{ nbproduit > 0 ? ((nbproduithorsdusage / nbproduit) * 100) | round(0) }}%</span>
@@ -31,7 +29,6 @@
         <h2 class="mt-4 text-lg font-bold text-gray-800">Produits hors d'usage</h2>
     </div>
 
-    <!-- Card: Produits à réparer -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
         <div class="relative w-24 h-24">
             <svg class="w-full h-full" viewBox="0 0 36 36">
@@ -47,7 +44,6 @@
         <h2 class="mt-4 text-lg font-bold text-gray-800">Produits à réparer</h2>
     </div>
 
-    <!-- Card: Produits en prêt -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
         <div class="relative w-24 h-24">
             <svg class="w-full h-full" viewBox="0 0 36 36">
@@ -63,7 +59,6 @@
         <h2 class="mt-4 text-lg font-bold text-gray-800">Produits en prêt</h2>
     </div>
 
-    <!-- Card: Produits retournés -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
         <div class="relative w-24 h-24">
             <svg class="w-full h-full" viewBox="0 0 36 36">
@@ -79,7 +74,6 @@
         <h2 class="mt-4 text-lg font-bold text-gray-800">Produits retournés</h2>
     </div>
 
-    <!-- Card: Nombre de catégories -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
         <div class="w-24 h-24 bg-purple-500 text-white rounded-full flex items-center justify-center text-2xl font-semibold">
             {{ nbCat }}
@@ -87,7 +81,6 @@
         <h2 class="mt-4 text-lg font-bold text-gray-800">Nombre de catégories</h2>
     </div>
 
-    <!-- Card: Produits en retard -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
         <div class="relative w-24 h-24">
             <svg class="w-full h-full" viewBox="0 0 36 36">
@@ -102,6 +95,6 @@
         </div>
         <h2 class="mt-4 text-lg font-bold text-gray-800">Produits en retard</h2>
     </div>
-
 </div>
+
 {% endblock %}
