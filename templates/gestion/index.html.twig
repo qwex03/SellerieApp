@@ -95,6 +95,21 @@
         </div>
         <h2 class="mt-4 text-lg font-bold text-gray-800">Produits en retard</h2>
     </div>
+
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+        <div class="relative w-24 h-24">
+            <svg class="w-full h-full" viewBox="0 0 36 36">
+                <circle class="text-gray-200" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none" />
+                <circle class="text-red-600" stroke="currentColor" stroke-width="3.8" cx="18" cy="18" r="15.9155" fill="none"
+                        stroke-dasharray="{{ nbproduit > 0 ? ((Reparations / nbproduit) * 100) | round(0) : 0 }}, 100" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-lg font-semibold text-red-600">
+                <span class="text-2xl">{{ Reparations }}</span>
+                <span class="text-sm">{{ nbproduit > 0 ? ((Reparations / nbproduit) * 100) | round(0) }}%</span>
+            </div>
+        </div>
+        <h2 class="mt-4 text-lg font-bold text-gray-800">Produits en cours de réparations</h2>
+    </div>
 </div>
 
 {% endblock %}
