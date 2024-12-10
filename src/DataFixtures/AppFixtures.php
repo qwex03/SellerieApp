@@ -87,7 +87,7 @@ class AppFixtures extends Fixture {
             $manager->persist($user);
         }
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $historique = new Historique();
             $dateRetour = new \DateTimeImmutable($faker->dateTimeBetween('now', '+20 days')->format('Y-m-d'));
             $historique->setDateRetour($dateRetour)

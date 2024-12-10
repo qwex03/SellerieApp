@@ -42,6 +42,41 @@
         </tbody>
     </table>
 
+    <h2 class="text-dark my-4 text-2xl font-semibold dark:text-white">Planning des prêts des produits</h2>
+
+    <div id="calendar"></div>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script>
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        var events = [
+            {% for historique in historiques %}
+            {
+                title: "Prêts de {{  historique.getProduit().getNom() }}",
+                start: "{{ historique.datePret ? historique.datePret|date('Y-m-d') : '' }}",
+                end: "{{ historique.dateRetour ? historique.dateRetour|date('Y-m-d') : '' }}",
+                backgroundColor: getRandomColor() 
+            },
+            {% endfor %}
+        ];
+
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: 'fr',
+            initialView: 'dayGridMonth',
+            events: events
+        });
+        calendar.render();
+    </script>
+
     <a href="{{ path('app_historique_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter un prêt</a>
 
 
