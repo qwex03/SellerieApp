@@ -20,12 +20,15 @@ Suivez les étapes ci-dessous pour installer le projet :
 
 5. **Créer la base de données**  
    Créez la base de données en exécutant la commande :  
-   `php bin/console doctrine:database:create`
+   `symfony console doctrine:database:create`
 
 6. **Appliquer les migrations**  
    Appliquez les migrations de la base de données avec la commande :  
-   `php bin/console doctrine:migrations:migrate`
+   `symfony console doctrine:migrations:migrate`
 
 7. **Charger les fixtures**  
    Remplissez la base de données avec des fixtures en exécutant :  
-   `php bin/console doctrine:fixtures:load`
+   `symfony console doctrine:fixtures:load`
+
+8. **Démarrer le serveur**
+   `symfony server:start`
