@@ -14,7 +14,9 @@
                 <th>Catégorie</th>
                 <th>Etat</th>
                 <th>Localisation</th>
-                <th>Actions</th>
+                {% if app.user %}
+                    <th>Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -25,10 +27,12 @@
                 <td>{{ produit.getIdCategorie().getNomCategorie() }}</td>
                 <td>{{ produit.getIdEtat().getNom() }}</td>
                 <td>{{ produit.getIdEmplacement().getRayon()}}, {{ produit.getIdEmplacement().getEtagere() }}</td>    
+                {% if app.user %}
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-yellow-600 transition duration-300">Modifier</a>
                 </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -37,7 +41,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    
+    {% if app.user %}
     <a href="{{ path('app_produit_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter un produit</a>
+    {% endif %}
 {% endblock %}
 

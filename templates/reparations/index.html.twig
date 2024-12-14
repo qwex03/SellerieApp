@@ -18,26 +18,29 @@
             </tr>
         </thead>
         <tbody>
-        {% for reparation in reparations %}
-            <tr>
-                <td>{{ reparation.getProduit().getNom() }}</td>
-                <td>{{ reparation.dateSignalement ? reparation.dateSignalement|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reparation.getStatus().getEtat() }}</td>
-                <td>{{ reparation.dateStart ? reparation.dateStart|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reparation.dateEnd ? reparation.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reparation.getReparateur() and reparation.getReparateur().getEmail() ? reparation.getReparateur().getEmail() : 'Non assigné' }}</td>
-                <td>
-                    <a href="{{ path('app_reparations_show', {'id': reparation.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
-                    <a href="{{ path('app_reparations_edit', {'id': reparation.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Modifier</a>
-                </td>
-            </tr>
+        {% if reparations is not empty %}
+            {% for reparation in reparations %}
+                <tr>
+                    <td>{{ reparation.getProduit().getNom() }}</td>
+                    <td>{{ reparation.dateSignalement ? reparation.dateSignalement|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reparation.getStatus().getEtat() }}</td>
+                    <td>{{ reparation.dateStart ? reparation.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reparation.dateEnd ? reparation.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reparation.getReparateur() and reparation.getReparateur().getEmail() ? reparation.getReparateur().getEmail() : 'Non assigné' }}</td>
+                    <td>
+                        <a href="{{ path('app_reparations_show', {'id': reparation.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
+                        <a href="{{ path('app_reparations_edit', {'id': reparation.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
         {% else %}
             <tr>
-                <td>no records found</td>
+                <td colspan="7" class="text-center">Aucune réparation trouvée.</td>
             </tr>
-        {% endfor %}
+        {% endif %}
         </tbody>
     </table>
+
 
     <a href="{{ path('app_reparations_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter une Réparations</a>
 

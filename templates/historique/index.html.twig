@@ -14,7 +14,9 @@
                 <th>Nom</th>
                 <th>Produit</th>
                 <th>Retour</th>
-                <th>actions</th>
+                {% if app.user %}
+                    <th>actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -26,6 +28,7 @@
                 <td>{{ historique.nom }}</td>
                 <td>{{ historique.getProduit().getNom() }}</td>
                 <td>{{ historique.retour ? "Oui" : "Non" }}</td>
+                {% if app.user %}
                 <td>
                     {% if not historique.retour %}
                     <a href="{{ path('app_historique_retour', {'id': historique.id})}}" class="inline-block bg-orange-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Retour</a>
@@ -33,6 +36,7 @@
                     <a href="{{ path('app_historique_show', {'id': historique.id}) }}" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Détail</a>
                     <a href="{{ path('app_historique_edit', {'id': historique.id}) }}" class="inline-block bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Modifier</a>
                 </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -77,7 +81,9 @@
         calendar.render();
     </script>
 
+    {% if app.user %}
     <a href="{{ path('app_historique_new') }}" class="inline-block bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Ajouter un prêt</a>
+    {% endif %}
 
 
 {% endblock %}

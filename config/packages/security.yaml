@@ -37,6 +37,8 @@ security:
         - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/gestion, roles: ROLE_ADMIN }
         - { path: '^/.*(new)', roles: ROLE_USER }
+        - { path: '^/(categorie|emplacement|historique|produit|reparations)/.*/(edit)', roles: ROLE_USER }
+        - { path: '^/(categorie|emplacement|reparations)', roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
