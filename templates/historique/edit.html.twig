@@ -5,9 +5,7 @@
 {% block body %}
     <h1 class="text-center">Modifier Historique</h1>
 
-    {{ include('historique/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_historique_index') }}" class="text-center">Retour</a>
+    {{ include('historique/_form.html.twig', {'button_label': 'Modifier'}) }}
 
     {{ include('historique/_delete_form.html.twig') }}
 {% endblock %}

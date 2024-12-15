@@ -5,8 +5,9 @@
         }) }}
         <div class="text-right">
             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600">
-                {{ button_label|default('Save') }}
+                {{ button_label|default('Enregistrer') }}
             </button>
+            <a href="{{ path('app_categorie_index') }}" class="px-4 py-2 bg-green-500 text-white rounded-md shadow hover:bg-green-600 transition duration-300 ease-in-out">Retour</a>
         </div>
     {{ form_end(form) }}
 </div>

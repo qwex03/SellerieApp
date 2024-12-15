@@ -5,9 +5,8 @@
 {% block body %}
     <h1 class="text-center">Modifier Categorie</h1>
 
-    {{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_categorie_index') }}" class="text-center">Retour</a>
+    
+    {{ include('categorie/_form.html.twig', {'button_label': 'Modifier'}) }}
 
     {{ include('categorie/_delete_form.html.twig') }}
 {% endblock %}
