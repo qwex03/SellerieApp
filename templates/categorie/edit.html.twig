@@ -6,8 +6,10 @@
     <h1 class="text-center">Modifier Categorie</h1>
 
     {{ include('categorie/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <div class="flex justify-center mt-10">
     {{ include('categorie/_delete_form.html.twig') }}
-
+    </div>
+    
     {% for type, messages in app.flashes %}
     <div class="alert alert-{{ type }}" role="alert">
         {% for message in messages %}

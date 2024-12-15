@@ -6,6 +6,7 @@
     <h1 class="text-center">Modifier Historique</h1>
 
     {{ include('historique/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-    {{ include('historique/_delete_form.html.twig') }}
+    <div class="flex justify-center mt-10">
+        {{ include('historique/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

@@ -6,6 +6,7 @@
     <h1 class="text-center">Modifier Produit</h1>
 
     {{ include('produit/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-    {{ include('produit/_delete_form.html.twig') }}
+    <div class="flex justify-center mt-10">
+        {{ include('produit/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

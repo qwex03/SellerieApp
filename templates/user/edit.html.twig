@@ -6,6 +6,7 @@
     <h1>Modifier User</h1>
 
     {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-    {{ include('user/_delete_form.html.twig') }}
+    <div class="flex justify-center mt-10">
+        {{ include('user/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

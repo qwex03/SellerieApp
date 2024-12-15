@@ -76,6 +76,7 @@ final class CategorieController extends AbstractController
                 $entityManager->flush();
             }
         } catch (\Exception $err) {
+            dd("test");
             $this->addFlash('error', 'Impossible de supprimer car il est lié à d\'autres éléments.');
         }
 
