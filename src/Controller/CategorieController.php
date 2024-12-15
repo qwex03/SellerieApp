@@ -70,10 +70,13 @@ final class CategorieController extends AbstractController
 
     #[Route('/{id}', name: 'app_categorie_delete', methods: ['POST'])]
     public function delete(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($categorie);
-            $entityManager->flush();
+    {   try {
+            if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->getPayload()->getString('_token'))) {
+                $entityManager->remove($categorie);
+                $entityManager->flush();
+            }
+        } catch (\Exception $err) {
+            $this->addFlash('error', 'Impossible de supprimer car il est lié à d\'autres éléments.');
         }
 
         return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);

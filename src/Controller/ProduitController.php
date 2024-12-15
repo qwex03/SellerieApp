@@ -72,9 +72,13 @@ final class ProduitController extends AbstractController
     #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($produit);
-            $entityManager->flush();
+        try {
+            if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->getPayload()->getString('_token'))) {
+                $entityManager->remove($produit);
+                $entityManager->flush();
+            }
+        } catch (\Exception $err) {
+            $this->addFlash('error', 'Impossible de supprimer car il est lié à d\'autres éléments.');
         }
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);

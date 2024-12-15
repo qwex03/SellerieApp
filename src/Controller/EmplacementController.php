@@ -70,10 +70,14 @@ final class EmplacementController extends AbstractController
 
     #[Route('/{id}', name: 'app_emplacement_delete', methods: ['POST'])]
     public function delete(Request $request, Emplacement $emplacement, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$emplacement->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($emplacement);
-            $entityManager->flush();
+    {   
+        try {
+            if ($this->isCsrfTokenValid('delete'.$emplacement->getId(), $request->getPayload()->getString('_token'))) {
+                $entityManager->remove($emplacement);
+                $entityManager->flush();
+            }
+        } catch (\Exception $err) {
+            $this->addFlash('error', 'Impossible de supprimer car il est lié à d\'autres éléments.');
         }
 
         return $this->redirectToRoute('app_emplacement_index', [], Response::HTTP_SEE_OTHER);
