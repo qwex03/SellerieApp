@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ historique.id }}</td>
                 <td>{{ historique.datePret|date('d/m/y')}}</td>
-                <td>{{ historique.dateRetour|date('d/m/y') }}</td>
+                <td >{{ historique.dateRetour|date('d/m/y') }}</td>
                 <td>{{ historique.nom }}</td>
                 <td>{{ historique.getProduit().getNom() }}</td>
                 <td>{{ historique.retour ? "Oui" : "Non" }}</td>

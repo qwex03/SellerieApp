@@ -47,7 +47,7 @@ class HistoriqueRepository extends ServiceEntityRepository
             return $this->createQueryBuilder('h')
                 ->select('COUNT(h.id)') 
                 ->where('h.date_retour < :currentDate')
-                ->andWhere('h.retour = 0') 
+                ->andWhere('h.retour IS NULL') 
                 ->setParameter('currentDate', new \DateTime()) 
                 ->getQuery()
                 ->getSingleScalarResult(); 
@@ -57,7 +57,7 @@ class HistoriqueRepository extends ServiceEntityRepository
         {
             return $this->createQueryBuilder('h')
                 ->where('h.date_retour < :currentDate')
-                ->andWhere('h.retour = 0')
+                ->andWhere('h.retour IS NULL')
                 ->setParameter('currentDate', new \DateTime())
                 ->getQuery()
                 ->getResult();
