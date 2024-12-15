@@ -102,7 +102,7 @@ final class HistoriqueController extends AbstractController
                 $reparation = new Reparations();
                 $reparation->setProduit($produit);
                 $reparation->setDateSignalement(new \DateTime());
-                $status = $entityManager->getRepository(Statuts::class)->find(1); 
+                $status = $entityManager->getRepository(Statuts::class)->findOneBy(['etat' => 'fini']); 
                 if ($status) {
                     $reparation->setStatus($status); 
                     $entityManager->persist($reparation);
