@@ -35,3 +35,7 @@ Suivez les étapes ci-dessous pour installer le projet :
    Démarrer le serveur avec la commande :
    
    `symfony server:start`
+
+9. **Lien vers le guide Utilisateur**
+   Lien :
+   https://docs.google.com/document/d/1CchdFeiJo-gSfB-slFJXvEY7XNEIj-AZuRURCZjg8Vg/edit?usp=sharing
